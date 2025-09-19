@@ -1,0 +1,38 @@
+name:  Deploy Hugging Face App
+
+on:
+  push:
+    paths:
+      - "hf_app/**"
+      - ".github/workflows/deploy_to_hf.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Hugging Face
+
+    steps:
+      - name:  Checkout Repo (with LFS support)
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name:  Set up Git identity
+        run: |
+          git config --global user.email "hussnainkhalil2001@gmail.com"
+          git config --global user.name "rhkraptor"
+
+      - name:  Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd hf_app
+          git init
+          git lfs install
+          git lfs track "*.pt"
+          git add .gitattributes  # important to track LFS rules
+          git checkout -b main
+          git remote add origin https://rhkraptor:${HF_TOKEN}@huggingface.co/spaces/rhkraptor/BananaOrApple
+          git add .
+          git commit -m " Auto deploy update from GitHub Actions"
+          git push origin main --force
