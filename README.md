@@ -1,4 +1,7 @@
-# 🍏🍌 Apple vs. Banana Classifier
+# 🍏🍌 Apple vs. Banana Classifier (PDL Project)
 
-This project implements a deep learning model to classify apples and bananas from images.  
-It covers the full pipeline from **data exploration** to **model training** and a **deployable app** for inference.
+This project applies **Deep Learning** to classify images of apples, bananas, and others.  
+We explored two different approaches: **Transfer Learning (ResNet18)** and a **custom CNN architecture**.  
+The best models are deployed as an interactive app on **[Hugging Face Spaces](https://huggingface.co/spaces/rhkraptor/BananaOrApple)**.
+
+---
